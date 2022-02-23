@@ -1,6 +1,8 @@
 package containers
 
 import (
+	"fmt"
+
 	"golang.org/x/exp/constraints"
 )
 
@@ -34,4 +36,8 @@ func (p *MinMaxValue[T]) Cur() T {
 
 func (p *MinMaxValue[T]) Max() T {
 	return p.maxValue
+}
+
+func (p *MinMaxValue[T]) Format(format string, a ...any) string {
+	return fmt.Sprintf(format, append([]any{p.Min(), p.Cur(), p.Max()}, a...)...)
 }

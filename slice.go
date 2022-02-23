@@ -90,7 +90,7 @@ func (p *Slice[T]) Enumerate(fn func(item T) error) error {
 	return nil
 }
 
-// Take kakes the first n items of []Elem
+// Take takes the first n items of []Elem
 func (p *Slice[T]) Take(nCount int) *Slice[T] {
 	return &Slice[T]{d: p.d[:nCount]}
 }
