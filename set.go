@@ -23,7 +23,7 @@ func NewSet[T comparable](initial ...T) *Set[T] {
 // Find the difference between two sets
 func (this *Set[T]) Difference(set *Set[T]) *Set[T] {
 	n := make(map[T]nothing)
-	for k, _ := range this.hash {
+	for k := range this.hash {
 		if _, exists := set.hash[k]; !exists {
 			n[k] = nothing{}
 		}
@@ -34,7 +34,7 @@ func (this *Set[T]) Difference(set *Set[T]) *Set[T] {
 
 // Call f for each item in the set
 func (this *Set[T]) Do(f func(T)) {
-	for k, _ := range this.hash {
+	for k := range this.hash {
 		f(k)
 	}
 }
@@ -54,7 +54,7 @@ func (this *Set[T]) Insert(element T) {
 func (this *Set[T]) Intersection(set *Set[T]) *Set[T] {
 	n := make(map[T]nothing)
 
-	for k, _ := range this.hash {
+	for k := range this.hash {
 		if _, exists := set.hash[k]; exists {
 			n[k] = nothing{}
 		}
@@ -83,7 +83,7 @@ func (this *Set[T]) SubsetOf(set *Set[T]) bool {
 	if this.Len() > set.Len() {
 		return false
 	}
-	for k, _ := range this.hash {
+	for k := range this.hash {
 		if _, exists := set.hash[k]; !exists {
 			return false
 		}
@@ -94,10 +94,10 @@ func (this *Set[T]) SubsetOf(set *Set[T]) bool {
 // Find the union of two sets
 func (this *Set[T]) Union(set *Set[T]) *Set[T] {
 	n := make(map[T]nothing)
-	for k, _ := range this.hash {
+	for k := range this.hash {
 		n[k] = nothing{}
 	}
-	for k, _ := range set.hash {
+	for k := range set.hash {
 		n[k] = nothing{}
 	}
 

@@ -12,6 +12,10 @@ func NewSlice[T any](v ...T) *Slice[T] {
 	return &Slice[T]{d: v}
 }
 
+func (p *Slice[T]) Reset() {
+	p.d = []T{}
+}
+
 func (p *Slice[T]) Append(v T) *Slice[T] {
 	p.d = append(p.d, v)
 	return p
@@ -70,6 +74,16 @@ func (p *Slice[T]) Last() T {
 	}
 
 	return p.d[nCount-1]
+}
+
+func (p *Slice[T]) GetAt(idx int) T {
+	nCount := len(p.d)
+	if nCount == 0 || idx >= nCount {
+		var t T
+		return t
+	}
+
+	return p.d[idx]
 }
 
 func (p *Slice[T]) Slice() []T {
