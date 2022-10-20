@@ -104,3 +104,11 @@ func (p *MinMaxValue[T]) ReadFrom(r io.Reader) error {
 func (p *MinMaxValue[T]) GobDecode(v []byte) error {
 	return p.ReadFrom(bytes.NewBuffer(v))
 }
+
+func (p *MinMaxValue[T]) ToMap() map[string]interface{} {
+	return map[string]interface{}{
+		"min": p.minValue,
+		"max": p.maxValue,
+		"cur": p.curValue,
+	}
+}
