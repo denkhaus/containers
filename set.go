@@ -20,6 +20,26 @@ func NewSet[T comparable](initial ...T) *Set[T] {
 	return s
 }
 
+// Transforms Set to Slice
+func (this *Set[T]) ToSlice() *Slice[T] {
+	n := []T{}
+	for k := range this.hash {
+		n = append(n, k)
+	}
+
+	return NewSlice(n...)
+}
+
+// Get the sets values
+func (this *Set[T]) Values() []T {
+	n := []T{}
+	for k := range this.hash {
+		n = append(n, k)
+	}
+
+	return n
+}
+
 // Find the difference between two sets
 func (this *Set[T]) Difference(set *Set[T]) *Set[T] {
 	n := make(map[T]nothing)
