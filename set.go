@@ -65,6 +65,11 @@ func (this *Set[T]) Has(element T) bool {
 	return exists
 }
 
+// Test if Set has any Items
+func (this *Set[T]) HasItems() bool {
+	return len(this.hash) > 0
+}
+
 // Add an element to the set
 func (this *Set[T]) Insert(element T) {
 	this.hash[element] = nothing{}
