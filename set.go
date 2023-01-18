@@ -93,9 +93,11 @@ func (this *Set[T]) ProperSubsetOf(set *Set[T]) bool {
 	return this.SubsetOf(set) && this.Len() < set.Len()
 }
 
-// Remove an element from the set
-func (this *Set[T]) Remove(element T) {
-	delete(this.hash, element)
+// Remove given elements from the set
+func (this *Set[T]) Remove(elements ...T) {
+	for _, k := range elements {
+		delete(this.hash, k)
+	}
 }
 
 // Test whether or not this set is a subset of "set"
