@@ -70,11 +70,8 @@ func (p *MinMaxValue[T]) WriteTo(w io.Writer) error {
 	if err := enc.Encode(p.curValue); err != nil {
 		return err
 	}
-	if err := enc.Encode(p.maxValue); err != nil {
-		return err
-	}
 
-	return nil
+	return enc.Encode(p.maxValue)
 }
 
 func (p *MinMaxValue[T]) GobEncode() ([]byte, error) {
@@ -94,11 +91,8 @@ func (p *MinMaxValue[T]) ReadFrom(r io.Reader) error {
 	if err := dec.Decode(&p.curValue); err != nil {
 		return err
 	}
-	if err := dec.Decode(&p.maxValue); err != nil {
-		return err
-	}
 
-	return nil
+	return dec.Decode(&p.maxValue)
 }
 
 func (p *MinMaxValue[T]) GobDecode(v []byte) error {
