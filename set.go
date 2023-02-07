@@ -105,6 +105,13 @@ func (this *Set[T]) Remove(elements ...T) {
 	}
 }
 
+// Remove a set from the set
+func (this *Set[T]) RemoveSet(set *Set[T]) {
+	for _, k := range set.Values() {
+		delete(this.hash, k)
+	}
+}
+
 // Test whether or not this set is a subset of "set"
 func (this *Set[T]) SubsetOf(set *Set[T]) bool {
 	if this.Len() > set.Len() {
