@@ -86,7 +86,7 @@ func (p *Slice[T]) GetAt(idx int) T {
 	return p.d[idx]
 }
 
-func (p *Slice[T]) Slice() []T {
+func (p *Slice[T]) Values() []T {
 	return p.d
 }
 
@@ -106,6 +106,7 @@ func (p *Slice[T]) Enumerate(fn func(item T) error) error {
 
 // Take takes the first n items of []Elem
 func (p *Slice[T]) Take(nCount int) *Slice[T] {
+	nCount = Min(nCount, len(p.d))
 	return &Slice[T]{d: p.d[:nCount]}
 }
 
