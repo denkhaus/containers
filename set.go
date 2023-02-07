@@ -1,6 +1,6 @@
 package containers
 
-// Credits: Make this set from  github.com/badgerodon/collections generic
+// Credits: Make p set from  github.com/badgerodon/collections generic
 
 type (
 	Set[T comparable] struct {
@@ -21,9 +21,9 @@ func NewSet[T comparable](initial ...T) *Set[T] {
 }
 
 // Transforms Set to Slice
-func (this *Set[T]) ToSlice() *Slice[T] {
+func (p *Set[T]) ToSlice() *Slice[T] {
 	n := []T{}
-	for k := range this.hash {
+	for k := range p.hash {
 		n = append(n, k)
 	}
 
@@ -31,9 +31,9 @@ func (this *Set[T]) ToSlice() *Slice[T] {
 }
 
 // Get the sets values
-func (this *Set[T]) Values() []T {
+func (p *Set[T]) Values() []T {
 	n := []T{}
-	for k := range this.hash {
+	for k := range p.hash {
 		n = append(n, k)
 	}
 
@@ -41,9 +41,9 @@ func (this *Set[T]) Values() []T {
 }
 
 // Find the difference between two sets
-func (this *Set[T]) Difference(set *Set[T]) *Set[T] {
+func (p *Set[T]) Difference(set *Set[T]) *Set[T] {
 	n := make(map[T]nothing)
-	for k := range this.hash {
+	for k := range p.hash {
 		if _, exists := set.hash[k]; !exists {
 			n[k] = nothing{}
 		}
@@ -53,33 +53,33 @@ func (this *Set[T]) Difference(set *Set[T]) *Set[T] {
 }
 
 // Call f for each item in the set
-func (this *Set[T]) Do(f func(T)) {
-	for k := range this.hash {
+func (p *Set[T]) Do(f func(T)) {
+	for k := range p.hash {
 		f(k)
 	}
 }
 
 // Test to see whether or not the element is in the set
-func (this *Set[T]) Has(element T) bool {
-	_, exists := this.hash[element]
+func (p *Set[T]) Has(element T) bool {
+	_, exists := p.hash[element]
 	return exists
 }
 
 // Test if Set has any Items
-func (this *Set[T]) HasItems() bool {
-	return len(this.hash) > 0
+func (p *Set[T]) HasItems() bool {
+	return len(p.hash) > 0
 }
 
 // Add an element to the set
-func (this *Set[T]) Insert(element T) {
-	this.hash[element] = nothing{}
+func (p *Set[T]) Insert(element T) {
+	p.hash[element] = nothing{}
 }
 
 // Find the intersection of two sets
-func (this *Set[T]) Intersection(set *Set[T]) *Set[T] {
+func (p *Set[T]) Intersection(set *Set[T]) *Set[T] {
 	n := make(map[T]nothing)
 
-	for k := range this.hash {
+	for k := range p.hash {
 		if _, exists := set.hash[k]; exists {
 			n[k] = nothing{}
 		}
@@ -89,35 +89,36 @@ func (this *Set[T]) Intersection(set *Set[T]) *Set[T] {
 }
 
 // Return the number of items in the set
-func (this *Set[T]) Len() int {
-	return len(this.hash)
+func (p *Set[T]) Len() int {
+	return len(p.hash)
 }
 
-// Test whether or not this set is a proper subset of "set"
-func (this *Set[T]) ProperSubsetOf(set *Set[T]) bool {
-	return this.SubsetOf(set) && this.Len() < set.Len()
+// Test whether or not p set is a proper subset of "set"
+func (p *Set[T]) ProperSubsetOf(set *Set[T]) bool {
+	return p.SubsetOf(set) && p.Len() < set.Len()
 }
 
 // Remove given elements from the set
-func (this *Set[T]) Remove(elements ...T) {
+func (p *Set[T]) Remove(elements ...T) {
 	for _, k := range elements {
-		delete(this.hash, k)
+		delete(p.hash, k)
 	}
 }
 
 // Remove a set from the set
-func (this *Set[T]) RemoveSet(set *Set[T]) {
+func (p *Set[T]) RemoveSet(set *Set[T]) {
 	for _, k := range set.Values() {
-		delete(this.hash, k)
+		delete(p.hash, k)
 	}
 }
 
 // Test whether or not this set is a subset of "set"
-func (this *Set[T]) SubsetOf(set *Set[T]) bool {
-	if this.Len() > set.Len() {
+func (p *Set[T]) SubsetOf(set *Set[T]) bool {
+	if p.Len() > set.Len() {
 		return false
 	}
-	for k := range this.hash {
+
+	for k := range p.hash {
 		if _, exists := set.hash[k]; !exists {
 			return false
 		}
@@ -126,9 +127,9 @@ func (this *Set[T]) SubsetOf(set *Set[T]) bool {
 }
 
 // Find the union of two sets
-func (this *Set[T]) Union(set *Set[T]) *Set[T] {
+func (p *Set[T]) Union(set *Set[T]) *Set[T] {
 	n := make(map[T]nothing)
-	for k := range this.hash {
+	for k := range p.hash {
 		n[k] = nothing{}
 	}
 	for k := range set.hash {
