@@ -52,14 +52,37 @@ func (p *Set[T]) Difference(set *Set[T]) *Set[T] {
 	return &Set[T]{n}
 }
 
-// Call f for each item in the set
+// Do calls f for each item in the set
 func (p *Set[T]) Do(f func(T)) {
 	for k := range p.hash {
 		f(k)
 	}
 }
 
-// Test to see whether or not the element is in the set
+// ForEach calls the given function for each element in the set.
+//
+// The function takes a parameter 'f' of type 'func(T) error'. It should
+// receive an element of type 'T' and return an error if any.
+//
+// It returns an error if the function 'f' returns an error during iteration.
+// Otherwise, it returns nil.
+func (p *Set[T]) ForEach(f func(T) error) error {
+	for k := range p.hash {
+		if err := f(k); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+// Has checks if the given element exists in the Set.
+//
+// Parameters:
+// - element: the element to check for existence in the Set.
+//
+// Returns:
+// - bool: true if the element exists in the Set, false otherwise.
 func (p *Set[T]) Has(element T) bool {
 	_, exists := p.hash[element]
 	return exists
