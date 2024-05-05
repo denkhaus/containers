@@ -42,7 +42,7 @@ func (p *Slice[T]) Clone() *Slice[T] {
 	return pp
 }
 
-func (p *Slice[T]) Sort(fn func(x, y T) bool) *Slice[T] {
+func (p *Slice[T]) Sort(fn func(x, y T) int) *Slice[T] {
 	slices.SortStableFunc(p.d, fn)
 	return p
 }
