@@ -1,5 +1,5 @@
 module github.com/denkhaus/containers
 
-go 1.22
+go 1.23
 
-require golang.org/x/exp v0.0.0-20220218215828-6cf2b201936e
+require golang.org/x/exp v0.0.0-20250103183323-7d7fa50e5329
