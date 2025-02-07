@@ -128,6 +128,11 @@ func (p *Set[T]) Remove(elements ...T) {
 	}
 }
 
+// Clear removes all elements from the set.
+func (p *Set[T]) Clear() {
+	p.hash = make(map[T]nothing)
+}
+
 // Remove a set from the set
 func (p *Set[T]) RemoveSet(set *Set[T]) {
 	for _, k := range set.Values() {
