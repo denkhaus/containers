@@ -32,6 +32,6 @@ func (p *Tuple[T1, T2]) Get2() T2 {
 //	t := NewTupple(1, "hello")
 //	t.Get1() // returns 1
 //	t.Get2() // returns "hello"
-func NewTupple[T1 any, T2 any](v1 T1, v2 T2) *Tuple[T1, T2] {
+func NewTuple[T1 any, T2 any](v1 T1, v2 T2) *Tuple[T1, T2] {
 	return &Tuple[T1, T2]{T1Val: v1, T2Val: v2}
 }
