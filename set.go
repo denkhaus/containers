@@ -93,9 +93,11 @@ func (p *Set[T]) HasItems() bool {
 	return len(p.hash) > 0
 }
 
-// Add an element to the set
-func (p *Set[T]) Insert(element T) {
-	p.hash[element] = nothing{}
+// Add one or more elements to the set
+func (p *Set[T]) Insert(elements ...T) {
+	for _, k := range elements {
+		p.hash[k] = nothing{}
+	}
 }
 
 // Find the intersection of two sets
